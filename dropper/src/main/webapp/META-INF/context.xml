@@ -1,0 +1,10 @@
+<Context>
+	<Resource name="jdbc/mysql"
+			  auth="Container"
+	          type="javax.sql.DataSource"
+	          driverClassName="com.mysql.jdbc.Driver"
+	          url="jdbc:mysql://localhost/dropper?autoReconnect=true"
+	          username="root"
+	          password="mysql"
+	/>
+</Context>
