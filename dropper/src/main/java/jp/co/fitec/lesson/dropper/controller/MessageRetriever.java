@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
 import jp.co.fitec.lesson.dropper.integration.dao.DAOFactory;
-import jp.co.fitec.lesson.dropper.integration.dao.MessageDao;
+import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
 
 public class MessageRetriever implements Action {
 	
@@ -21,9 +21,9 @@ public class MessageRetriever implements Action {
 		Double lon = (Double)session.getAttribute("lon");
 		int dist = new Integer(request.getParameter("dist"));
 		
-		MessageDao dao = DAOFactory.createMessageDao();
+		MessageDAO dao = DAOFactory.createMessageDAO();
 		List<Message> message = dao.findByPlace(lat, lon, dist);
-		
+			
 		session.setAttribute("messages", message);
 		
 		return "/index.jsp";

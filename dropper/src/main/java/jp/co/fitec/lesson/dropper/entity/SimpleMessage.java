@@ -36,12 +36,12 @@ public class SimpleMessage implements Message {
 	public SimpleMessage() {}
 
 
-	public SimpleMessage(long number, double lattitude, double longitude,
+	public SimpleMessage(long number, double latitude, double longitude,
 			Date dateTime, String message, String name, String deleteKey,
 			int isActive) {
 		super();
 		this.number = number;
-		this.latitude = lattitude;
+		this.latitude = latitude;
 		this.longitude = longitude;
 		this.dateTime = dateTime;
 		this.message = message;
@@ -69,11 +69,11 @@ public class SimpleMessage implements Message {
 		this.number = number;
 	}
 
-	public double getLattitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLattitude(double lattitude) {
+	public void setLatitude(double lattitude) {
 		this.latitude = lattitude;
 	}
 
@@ -115,6 +115,15 @@ public class SimpleMessage implements Message {
 
 	public void setDeleteKey(String deleteKey) {
 		this.deleteKey = deleteKey;
+	}
+
+
+	@Override
+	public String toString() {
+		return "[number=" + number + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", dateTime=" + dateTime
+				+ ", message=" + message + ", name=" + name + ", deleteKey="
+				+ deleteKey + "]\n";
 	}
 
 }
