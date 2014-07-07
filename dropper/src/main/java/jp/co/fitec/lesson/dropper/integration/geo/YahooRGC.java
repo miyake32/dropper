@@ -2,9 +2,7 @@ package jp.co.fitec.lesson.dropper.integration.geo;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
