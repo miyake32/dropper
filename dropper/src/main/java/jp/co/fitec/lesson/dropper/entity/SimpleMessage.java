@@ -30,14 +30,11 @@ public class SimpleMessage implements Message {
 	@Column(name="delete_key")
 	private String deleteKey;
 	
-	@Column(name="is_active")
-	private boolean active = true;
-	
 	public SimpleMessage() {}
 
 	public SimpleMessage(long number, double lattitude, double longitude,
-			Date dateTime, String message, String name, String deleteKey,
-			boolean active) {
+			Date dateTime, String message, String name, String deleteKey
+			) {
 		super();
 		this.number = number;
 		this.lattitude = lattitude;
@@ -46,7 +43,6 @@ public class SimpleMessage implements Message {
 		this.message = message;
 		this.name = name;
 		this.deleteKey = deleteKey;
-		this.active = active;
 	}
 
 	public long getNumber() {
@@ -105,11 +101,4 @@ public class SimpleMessage implements Message {
 		this.deleteKey = deleteKey;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 }
