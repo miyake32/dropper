@@ -17,39 +17,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class YahooRGC implements ReverseGeoCoder {
-	/**
-	 * <p>
-	 * 政令指定都市のSet: {"神奈川県", "横浜市"}のようなString[]を格納する
-	 * </p>
-	 * <p>
-	 * formatted addressの形式を政令指定都市とその他で分けるために使用
-	 * </p>
-	 */
-	private static final Set<String[]> DESIGNATED_CITIES = new HashSet<String[]>();
-
-	/**
-	 * <p>
-	 * Designated informationsを設定するためのメソッド
-	 * </p>
-	 */
-	private static void setDesignatedInfos() {
-		String[][] designatedCities = { { "北海道", "札幌市" }, { "宮城県", "仙台市" },
-				{ "埼玉県", "さいたま市" }, { "千葉県", "千葉市" }, { "神奈川県", "横浜市" },
-				{ "神奈川県", "川崎市" }, { "神奈川県", "相模原市" }, { "新潟県", "新潟市" },
-				{ "静岡県", "静岡市" }, { "静岡県", "浜松市" }, { "愛知県", "名古屋市" },
-				{ "京都府", "京都市" }, { "大阪府", "大阪市" }, { "大阪府", "堺市" },
-				{ "兵庫県", "神戸市" }, { "岡山県", "岡山市" }, { "広島県", "広島市" },
-				{ "福岡県", "北九州市" }, { "福岡県", "福岡市" }, { "熊本県", "熊本市" } };
-
-		for (String[] designatedCity : designatedCities) {
-			DESIGNATED_CITIES.add(designatedCity);
-		}
-	}
 
 	@Override
 	public List<String> getAddressElementList(double lat, double lon) {
-		List<String> addressElementList = new ArrayList<>(); 
-		
+		List<String> addressElementList = new ArrayList<>();
+
 		// Web Services Clientの作成
 		WebTarget webTarget = ClientBuilder
 				.newClient()
@@ -74,24 +46,25 @@ public class YahooRGC implements ReverseGeoCoder {
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(json));
 
+		boolean isAddressElement = false;
+		boolean isAddressElementName = false;
+
 		while (parser.hasNext()) {
 
 			Event event = parser.next();
 
-			boolean isAddressElement = false;
-			boolean isAddressElementName = false;
-
 			switch (event) {
 
 			case KEY_NAME: {
-				if (isAddressElement && parser.getString() == "Name") {
+				String keyName = parser.getString();
+				if (isAddressElement && keyName.equals("Name")) {
 					isAddressElementName = true;
 					break;
 				}
-				if (isAddressElement && parser.getString() == "Geometry") {
+				if (isAddressElement && keyName.equals("Geometry")) {
 					isAddressElement = false;
 				}
-				if (parser.getString() == "AddressElement") {
+				if (keyName.equals("AddressElement")) {
 					isAddressElement = true;
 					break;
 				}
@@ -100,7 +73,9 @@ public class YahooRGC implements ReverseGeoCoder {
 
 			case VALUE_STRING: {
 				if (isAddressElementName) {
-					addressElementList.add(parser.getString());
+					String name = parser.getString();
+					if (name.matches("\\S+"))
+						addressElementList.add(name);
 					isAddressElementName = false;
 				}
 				break;
@@ -115,16 +90,32 @@ public class YahooRGC implements ReverseGeoCoder {
 
 	@Override
 	public String getFormattedAddress(double lat, double lon) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	// for test
-	public static void main(String[] args) {
-		ReverseGeoCoder rgc = new YahooRGC();
-		List list =rgc.getAddressElementList(35.999792, 136.499662);
-		System.out.println(list);
+		List<String> addrElemList = getAddressElementList(lat, lon);
+		int numOfElem = addrElemList.size();
+
+		String formattedAddr = "";
+
+		if (numOfElem > 2) {
+			formattedAddr = addrElemList.get(2) + "（" + addrElemList.get(0)
+					+ addrElemList.get(1) + "）";
+		}
+		if (numOfElem == 2){
+		
+			formattedAddr = addrElemList.get(0) + addrElemList.get(1);
+		}
+		if (numOfElem == 1) {
+			formattedAddr = addrElemList.get(0);
+		}
+		
+		return formattedAddr;
+
 	}
 
+	// for test
+//	public static void main(String[] args) {
+//		ReverseGeoCoder rgc = new YahooRGC();
+//		List list = rgc.getAddressElementList(35.443708, 139.638026);
+//		System.out.println(list);
+//		System.out.println(rgc.getFormattedAddress(35.443708, 139.638026));
+//	}
 }
