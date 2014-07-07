@@ -1,6 +1,7 @@
 package jp.co.fitec.lesson.dropper.integration.dao;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
@@ -28,6 +29,15 @@ public class MessageDao extends BaseDao {
 		}
 		
 		return messageList;
+	}
+	
+	public SimpleMessage getNewMessage() {
+		Session session = sessionFactory.getCurrentSession();
+		SimpleMessage msg = (SimpleMessage) session.createSQLQuery("SELECT * FROM message WHERE number = (SELECT MAX(number) FROM message)").addEntity(SimpleMessage.class).list().get(0);
+		SimpleMessage newMsg = new SimpleMessage();
+		newMsg.setDateTime(new Date());
+		newMsg.setNumber(msg.getNumber() + 1);
+		return newMsg;
 	}
 	
 	public void insert(Message message) {

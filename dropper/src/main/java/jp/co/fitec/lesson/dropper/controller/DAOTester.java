@@ -36,7 +36,8 @@ public class DAOTester extends HttpServlet {
 		
 		MessageDao dao = new MessageDao();
 //		dao.insert(msg);
-		dao.remove(msg);
+//		dao.remove(msg);
+		System.out.println(dao.getNewMessage());
 	}
 
 	/**
