@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
+import jp.co.fitec.lesson.dropper.entity.SimpleMessage;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -14,10 +15,10 @@ public class MessageDao extends BaseDao {
 		
 		Session session = sessionFactory.getCurrentSession();
 		
-		SQLQuery sql = session.createSQLQuery("select * from message" + 
-			"where 6378137 * ACOS((sin(35.70720177894458 / 180 * PI()) * SIN("+ latitude +" / 180 * PI()))" + 
-			"+ (COS(35.70720177894458 / 180 * PI()) * COS("+ latitude +" / 180 * PI())" + 
-			"* COS(("+ longitude + " - 139.80443313717842) / 180 * PI()))) <= "+ distance +" AND is_active = 1" 
+		SQLQuery sql = session.createSQLQuery("select * from message " + 
+			"where 6378137 * ACOS((sin(latitude / 180 * PI()) * SIN("+ latitude +" / 180 * PI()))" + 
+			"+ (COS(latitude / 180 * PI()) * COS("+ latitude +" / 180 * PI())" + 
+			"* COS(("+ longitude + " - longitude) / 180 * PI()))) <= "+ distance +" AND is_active = 1" 
 			).addEntity(Message.class);	
 		
 		List<Message> messageList = sql.list();
@@ -29,21 +30,16 @@ public class MessageDao extends BaseDao {
 		return messageList;
 	}
 	
-	public boolean insert(Message message) {
+	public void insert(Message message) {
 		
 		Session session = sessionFactory.getCurrentSession();
 		session.save(message);
-		return true;
 	}
 	
-	public boolean remove(long number) {
+	public void remove(SimpleMessage message) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		
-		SQLQuery sql = session.createSQLQuery("update message set is_active = 0 where number = ?");
-		
-		sql.setBigInteger(0, new BigInteger(new Long(number).toString()));
-		
-		return true;
+		message.setIsActive(0);
+		session.update(message);
 	}
 }

@@ -5,18 +5,18 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Table;
 
 @Entity
-@Table(appliesTo = "message")
+@Table(name="message")
 public class SimpleMessage implements Message {
 	
 	@Id
 	private long number;
-	private double lattitude;
+	private double latitude;
 	private double longitude;
 	
 	@Column(name="date_time")
@@ -30,20 +30,36 @@ public class SimpleMessage implements Message {
 	@Column(name="delete_key")
 	private String deleteKey;
 	
+	@Column(name="is_active")
+	private int isActive;
+	
 	public SimpleMessage() {}
 
+
 	public SimpleMessage(long number, double lattitude, double longitude,
-			Date dateTime, String message, String name, String deleteKey
-			) {
+			Date dateTime, String message, String name, String deleteKey,
+			int isActive) {
 		super();
 		this.number = number;
-		this.lattitude = lattitude;
+		this.latitude = lattitude;
 		this.longitude = longitude;
 		this.dateTime = dateTime;
 		this.message = message;
 		this.name = name;
 		this.deleteKey = deleteKey;
+		this.isActive = isActive;
 	}
+
+
+	public int getIsActive() {
+		return isActive;
+	}
+
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+
 
 	public long getNumber() {
 		return number;
@@ -54,11 +70,11 @@ public class SimpleMessage implements Message {
 	}
 
 	public double getLattitude() {
-		return lattitude;
+		return latitude;
 	}
 
 	public void setLattitude(double lattitude) {
-		this.lattitude = lattitude;
+		this.latitude = lattitude;
 	}
 
 	public double getLongitude() {
