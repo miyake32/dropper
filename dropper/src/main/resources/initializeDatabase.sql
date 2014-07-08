@@ -14,3 +14,4 @@ CREATE TABLE message
 );
 
 INSERT INTO message VALUES (0, 0.0, 0.0, "1990-1-1-0-0-0",	"",	"",	"",	0);
+

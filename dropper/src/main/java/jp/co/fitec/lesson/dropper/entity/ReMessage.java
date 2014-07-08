@@ -1,26 +1,26 @@
 package jp.co.fitec.lesson.dropper.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-@Table(name="simplemessage")
-public class SimpleMessage implements Message {
+@Table(name="remessage")
+public class ReMessage implements Message {
+	
+	// 返信先
+	@Column(name="reply_to")
+	@ManyToOne
+	private long replyTo;
 	
 	@Id
 	private long number;
-	
 	private double latitude;
 	private double longitude;
 	
@@ -38,18 +38,13 @@ public class SimpleMessage implements Message {
 	@Column(name="is_active")
 	private int isActive;
 	
-	@OneToMany
-	@JoinColumn(name="number", referencedColumnName="reply_to")
-	@OrderBy("number DESC")
-	private List<ReMessage> reMessages;
-	
-	public SimpleMessage() {}
+	public ReMessage() {}
 
-
-	public SimpleMessage(long number, double latitude, double longitude,
-			Date dateTime, String message, String name, String deleteKey,
-			int isActive) {
+	public ReMessage(long replyTo, long number, double latitude,
+			double longitude, Date dateTime, String message, String name,
+			String deleteKey, int isActive) {
 		super();
+		this.replyTo = replyTo;
 		this.number = number;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -60,16 +55,13 @@ public class SimpleMessage implements Message {
 		this.isActive = isActive;
 	}
 
-
-	public int getIsActive() {
-		return isActive;
+	public long getReplyTo() {
+		return replyTo;
 	}
 
-
-	public void setIsActive(int isActive) {
-		this.isActive = isActive;
+	public void setReplyTo(long replyTo) {
+		this.replyTo = replyTo;
 	}
-
 
 	public long getNumber() {
 		return number;
@@ -83,8 +75,8 @@ public class SimpleMessage implements Message {
 		return latitude;
 	}
 
-	public void setLatitude(double lattitude) {
-		this.latitude = lattitude;
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 
 	public double getLongitude() {
@@ -127,12 +119,14 @@ public class SimpleMessage implements Message {
 		this.deleteKey = deleteKey;
 	}
 
-	@Override
-	public String toString() {
-		return "SimpleMessage [number=" + number + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", dateTime=" + dateTime
-				+ ", message=" + message + ", name=" + name + ", deleteKey="
-				+ deleteKey + ", isActive=" + isActive + ", reMessages="
-				+ reMessages + "]";
+	public int getIsActive() {
+		return isActive;
 	}
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+
+	
+	
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
 import jp.co.fitec.lesson.dropper.entity.MessageFactory;
+import jp.co.fitec.lesson.dropper.entity.ReMessage;
 import jp.co.fitec.lesson.dropper.entity.SimpleMessage;
 import jp.co.fitec.lesson.dropper.integration.dao.DAOFactory;
 import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
@@ -19,8 +20,8 @@ import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
 /**
  * Servlet implementation class DAOTester
  */
-@WebServlet("/Test/DAOTester")
-public class DAOTester extends HttpServlet {
+@WebServlet("/Test/DAOReplyTester")
+public class DAOReplyTester extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -37,20 +38,23 @@ public class DAOTester extends HttpServlet {
 //		response.getWriter().println(dao.findByPlace(33D, 135D, 30));
 
 		// remove => OK!
-		// List<Message> msgs;
-		// response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
-		// dao.remove(msgs.get(0));
-		// response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
-		// dao.remove(msgs.get(0));
-		// response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
+//		 List<Message> msgs;
+//		 response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
+//		 dao.remove(msgs.get(0));
+//		 response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
+//		 dao.remove(msgs.get(0));
+//		 response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
 
 		// insert => OK!
 		 Message newMsg = MessageFactory.createMessage();
-		 newMsg.setLatitude(33D);
-		 newMsg.setLongitude(135D);
-		 newMsg.setMessage("Now I'm testing DAO function!!\nIt's going fine!");
-		 newMsg.setName("Testman");
-		 newMsg.setDeleteKey("Test delete key");
+		 newMsg.setLatitude(34D);
+		 newMsg.setLongitude(134D);
+		 newMsg.setMessage("Reply message 2");
+		 newMsg.setName("user3");
+		 newMsg.setDeleteKey("deletekey1");
+		 ((ReMessage)newMsg).setReplyTo(1);
 		 dao.insert(newMsg);
+		 
+		 
 	}
 }
