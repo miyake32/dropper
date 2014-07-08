@@ -13,7 +13,7 @@ CREATE TABLE message
 	is_active BOOLEAN DEFAULT 1
 );
 
-INSERT INTO message VALUES (0, 0.0, 0.0, "0-0-0-0-0-0",	"",	"",	"",	0);
+INSERT INTO message VALUES (0, 0.0, 0.0, "1990-1-1-0-0-0",	"",	"",	"",	0);
 
 INSERT INTO message (number, latitude, longitude, date_time, message, user_name, delete_key) VALUES (1, 35.443708, 139.638026, "1990-03-02-15-30-24", "I am test\nI am at Yokohama\nDelete key is test", "test", "test");
 INSERT INTO message (number, latitude, longitude, date_time, message, user_name) VALUES (2, 34.693738, 135.502165, "1995-04-01-05-34-20", "I am spam\nI am at Osaka\nDelete key is not set", "spam");
