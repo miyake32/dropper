@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>:Dropper – drop your message anywhere!</title>
+
+<script src="javascript/script.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+<link href="css/NewFile.css" rel="stylesheet" type="text/css"
+	media="all">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+</head>
+<body>
+	<div id="headerArea">
+		<p>
+			神奈川県横浜市港北区日吉<br />
+		<form action="/dropper/geocode.do">
+			<input type="text" name="lat" value="34"> <input type="text"
+				name="lon" value="134"> <input type="submit" value="geo">
+		</form>
+	</div>
+
+	<div id="inputArea">
+
+		<form action="/dropper/register.do">
+			<textarea name="message" required="required"></textarea>
+
+			<br />
+			<!-- View source code -->
+			<div
+				class="ui-body ui-body-g ui-corner-all ui-shadow padding-responsive">
+				<a
+					class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-icon-check ui-btn-icon-left"
+					href="#popup_lin" data-transition="pop" data-rel="popup"
+					data-position-to="window">+α</a>
+			</div>
+			<div class="ui-corner-all" id="popup_lin" data-role="popup"
+				data-theme="a">
+				<a
+					class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-icon-delete ui-btn-icon-right ui-btn-icon-notext"
+					href="#" data-rel="back">閉じる</a>
+				<form>
+					<div class="ui-corner-top" data-role="header" data-theme="a">
+						<h4>+α</h4>
+					</div>
+					<div class="ui-corner-bottom ui-content" data-role="content"
+						data-theme="a">
+						<label class="ui-hidden-accessible" for="u_id">name:</label> <input
+							name="user" id="u_id" type="text" placeholder="Enter a name"
+							value="" data-theme="a"> <label
+							class="ui-hidden-accessible" for="u_id">deleteKey:</label> <input
+							name="user" id="u_id" type="text" placeholder="DeleteKey"
+							value="" data-theme="a">
+						<button type="submit" data-theme="a" data-icon="check">drop</button>
+					</div>
+				</form>
+			</div>
+			<br />
+
+
+			<button action="submit">drop</button>
+		</form>
+
+		<form action="/dropper/retrieve.do">
+			<input type="hidden" name="dist" value="50"> <input
+				type="submit" value="retrieve">
+		</form>
+
+	</div>
+	<div id="contentArea">
+
+		<c:forEach var="msg" items="${messages}">
+			<article>
+				<div id="message">
+					<p>おはよう、こんにちは、こんばんは</p>
+				</div>
+				<div id="messageFooter">
+					<p>2014-07-08名無しの勇者</p>
+				</div>
+				<div
+					class="ui-body ui-body-g ui-corner-all ui-shadow padding-responsive">
+					<a
+						class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-icon-check ui-btn-icon-left"
+						href="#popup_lin1" data-transition="pop" data-rel="popup"
+						data-position-to="window">delete</a>
+				</div>
+				
+				
+				<div class="ui-corner-all" id="popup_lin1" data-role="popup"
+					data-theme="a">
+
+					<a
+						class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-icon-delete ui-btn-icon-right ui-btn-icon-notext"
+						href="#" data-rel="back">閉じる</a>
+					<form>
+						<div class="ui-corner-top" data-role="header" data-theme="a">
+
+							<h4>delete</h4>
+						</div>
+						<div class="ui-corner-bottom ui-content" data-role="content"
+							data-theme="a">
+							<label class="ui-hidden-accessible" for="u_id">Key:</label> <input
+								name="user" id="u_id" type="text"
+								placeholder="Enter a deletekey" value="" data-theme="a">
+							<button type="submit" data-theme="a" data-icon="check">Delete</button>
+						</div>
+					</form>
+				</div>
+			</article>
+		</c:forEach>
+	</div>
+</body>
+</html>
