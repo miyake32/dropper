@@ -49,6 +49,7 @@ function doRetrieve() {
 	} else {
 		sessionStorage.isReloaded = 0;
 	}
+	alert("retrieve");
 }
 
 function initialLoad() {
@@ -63,12 +64,13 @@ function initialLoad() {
 	}
 }
 
-function drop() {
+function dropper_drop() {
 	$.get("/dropper/register.do", {
 		message : document.getElementsByName("message").item(0).value,
 		name : document.getElementsByName("name").item(0).value,
 		deleteKey : document.getElementsByName("deleteKey").item(0).value
 	});
 	location.assign("/dropper/index.jsp");
-
+	
+	alert("drop");
 }
