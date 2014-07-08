@@ -16,9 +16,11 @@
 		
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">true</property>
 	     
 	    <!-- Entity classes --> 
         <mapping class="jp.co.fitec.lesson.dropper.entity.SimpleMessage" />
+        <mapping class="jp.co.fitec.lesson.dropper.entity.ReMessage" />
  
     </session-factory>
 

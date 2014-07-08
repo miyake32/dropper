@@ -35,6 +35,6 @@ public interface Message {
 	public String getDeleteKey() ;
 
 	public void setDeleteKey(String deleteKey) ;
-
-	}
+	
+}
 
