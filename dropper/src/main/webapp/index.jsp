@@ -20,17 +20,15 @@
 
 	<div id="headerArea">
 		<p>${addr}
-			<br />
 		<h3>${error}</h3>
+		<input type="number" name="dist" value="1000">
 	</div>
 
 	<div id="inputArea">
-		<form action="/dropper/register.do">
 			<textarea name="message" required="required"></textarea>
 			<br /> name<input type=text name="name"> deleteKey<input
 				type=text name="deleteKey"> <br />
-			<button action="submit">送信</button>
-		</form>
+			<input type="button" value="drop" onclick="drop()">
 
 	</div>
 
