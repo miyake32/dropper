@@ -23,7 +23,6 @@ import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
 public class DAOTester extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -35,7 +34,7 @@ public class DAOTester extends HttpServlet {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 
 		// find => OK!
-		 response.getWriter().println(dao.findByPlace(33D, 135D, 30));
+		response.getWriter().println(dao.findByPlace(33D, 135D, 30));
 
 		// remove => OK!
 		// List<Message> msgs;

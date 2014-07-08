@@ -1,7 +1,6 @@
 package jp.co.fitec.lesson.dropper.integration.dao;
 
-import java.math.BigInteger;
-import java.util.Date;
+
 import java.util.List;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
@@ -22,6 +21,7 @@ public class MessageDAO extends BaseDAO {
 			"* COS(("+ longitude + " - longitude) / 180 * PI()))) <= "+ distance +" AND is_active = 1" 
 			).addEntity(SimpleMessage.class);	
 		
+		@SuppressWarnings("unchecked")
 		List<Message> messageList = sql.list();
 		
 		if(messageList == null) {
