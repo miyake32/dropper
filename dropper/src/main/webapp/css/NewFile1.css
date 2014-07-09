@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.sampleBox {
+	border: 1px solid #cccccc;
+	height: 200px;
+	position: relative;
+}
+
+.sampleBox img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
