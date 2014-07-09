@@ -31,7 +31,10 @@ div#footerArea {
 	color: #fff;
 }
 
-* html div#contentArea {
+* html div#inputArea {
+	position: absolute !important;
+	top: 100px !important;
+	
 	height: 100%;
 	overflow: auto;
 }

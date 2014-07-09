@@ -13,8 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-<link href="css/NewFile.css" rel="stylesheet" type="text/css"
-	media="all">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script
@@ -27,12 +25,11 @@
 		<input type="hidden" name="error" value="${error}"> <input
 			type="hidden" name="messages" value="${messages}">
 	</div>
-
 	<div id="headerArea">
 		<table>
 			<tr>
-				<td>${addr}</td>
-				<td class="ui-bar" data-role="footer" data-theme="g">
+				<th>${addr}</th>
+				<td class= data-role="footer" data-theme="g">
 					<form name="distForm" id="distForm">
 						<select name="dist" id="dist" onchange="select_box()"
 							data-theme="g" data-mini="true" data-inline="true">
@@ -92,44 +89,43 @@
 				<table border="3">
 					<tr>
 
-						<td>
+						<th>
 							<div id="messageFooter">
 								<p>${msg.dateTime}${msg.name}</p>
 							</div>
-						</td>
+						</th>
 						<td><a
 							class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-mail ui-btn-inline"
 							href="#popup_lin3" data-transition="pop" data-rel="popup"
-							data-position-to="window"></a></td>
+							data-position-to="window"></a>
 						<c:if test='${msg.deleteKey != null}'>
-							<td><a
+							<a
 								class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-delete ui-btn-inline"
 								href="#popup_lin1" data-transition="pop" data-rel="popup"
-								data-position-to="window"></a></td>
-						</c:if>
+								data-position-to="window"></a>
+						</c:if></td>
 
 					</tr>
 				</table>
 
 				<c:if test="${msg.reMessages != null}">
 					<div data-role="collapsible" data-mini="true">
-						返信
-						<c:forEach var="reMsg" items="msg.reMessages">
-						${reMsg}
+						<h6>返信</h6>
+						<c:forEach var="reMsg" items="${msg.reMessages}">
 						<article name="childMessage">
 								<div id="childMessage">
-									<p>${reMsg}</p>
+									<p>${reMsg.message}</p>
 								</div>
 								<div id="childMessageFooter">
 									<table border="3">
 										<tr>
 
-											<td>
+											<th>
 												<div id="messageFooter">
-													<p>${reMsg}${reMsg}</p>
+													<p>${reMsg.dateTime}${reMsg.name}</p>
 												</div>
-											</td>
-											<c:if test='${reMsg != null}'>
+											</th>
+											<c:if test='${reMsg.deleteKey != null}'>
 												<td><a
 													class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-delete ui-btn-inline"
 													href="#popup_lin1" data-transition="pop" data-rel="popup"
@@ -139,10 +135,6 @@
 										</tr>
 									</table>
 								</div>
-								<a
-									class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-delete ui-btn-inline"
-									href="#popup_lin1" data-transition="pop" data-rel="popup"
-									data-position-to="window"></a>
 
 							</article> 
 						</c:forEach>
