@@ -23,9 +23,12 @@ public class MessageRegister implements Action {
 		
 		// requestのparameterを取得
 		String message = request.getParameter("message");
-		String name = request.getParameter("name");
-		String deleteKey = request.getParameter("deleteKey");
-		
+		// sessionのattributeを取得
+		Double lat = (Double) session.getAttribute("lat");
+		Double lon = (Double) session.getAttribute("lon");
+		String name = (String) session.getAttribute("nameInStrage");
+		String deleteKey = (String) session.getAttribute("deleteKeyInStrage");
+
 		// name, deleteKeyに値がない場合はnull値を設定
 		if (name == "") {
 			name = null;
@@ -33,10 +36,6 @@ public class MessageRegister implements Action {
 		if (deleteKey == "") {
 			deleteKey = null;
 		}
-		
-		// sessionのattributeを取得
-		Double lat = (Double) session.getAttribute("lat");
-		Double lon = (Double) session.getAttribute("lon");
 		
 		// Messageオブジェクトに値を設定
 		msg.setMessage(message);

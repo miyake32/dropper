@@ -45,7 +45,7 @@ public class SimpleMessage implements Message, Serializable {
 	private int isActive;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="parentMessage")
-	@OrderBy("number DESC")
+	@OrderBy("number ASC")
 	private List<ReMessage> reMessages;
 	
 	public SimpleMessage() {}

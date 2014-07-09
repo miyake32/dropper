@@ -39,9 +39,9 @@ public class ReMessageDAO extends MessageDAO {
 	@Override
 	public Message getNewMessage() {
 		Session session = sessionFactory.getCurrentSession();
-		Message msg = (ReMessage) session.createSQLQuery("SELECT * FROM remessage WHERE number = (SELECT MAX(number) FROM remessage)").addEntity(ReMessage.class).list().get(0);
+		Message msg = (ReMessage) session.createSQLQuery("SELECT * FROM remessage WHERE number = (SELECT MIN(number) FROM remessage)").addEntity(ReMessage.class).list().get(0);
 		Message newMsg = new ReMessage();
-		newMsg.setNumber(msg.getNumber() + 1);
+		newMsg.setNumber(msg.getNumber() - 1);
 		return newMsg;
 	}
 	

@@ -25,10 +25,14 @@ public class ReMessageRegister implements Action {
 		
 		// requestのparameterを取得
 		String message = request.getParameter("message");
-		String name = request.getParameter("name");
-		String deleteKey = request.getParameter("deleteKey");
-		long replyTo = new Long(request.getParameter("replyTo"));
-		
+		Long replyTo = new Long(request.getParameter("replyTo"));
+		String name = (String) session.getAttribute("nameInStrage");
+		String deleteKey = (String) session.getAttribute("deleteKeyInStrage");
+
+		// sessionのattributeを取得
+		Double lat = (Double) session.getAttribute("lat");
+		Double lon = (Double) session.getAttribute("lon");
+
 		// name, deleteKey, replyToに値がない場合はnull値を設定
 		if (name == "") {
 			name = null;
@@ -37,9 +41,6 @@ public class ReMessageRegister implements Action {
 			deleteKey = null;
 		}
 		
-		// sessionのattributeを取得
-		Double lat = (Double) session.getAttribute("lat");
-		Double lon = (Double) session.getAttribute("lon");
 		
 		// Messageオブジェクトに値を設定
 		msg.setMessage(message);

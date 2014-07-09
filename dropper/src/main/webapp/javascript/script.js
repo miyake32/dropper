@@ -1,8 +1,8 @@
 /**
  * 
  */
-var reloaded = false;
-
+// 現在地情報を取得してRGCclientに投げる
+//--------------------------------------
 function doGeoCode(position) {
 	// 緯度と経度の取得
 	var lat = position.coords.latitude;
@@ -13,19 +13,20 @@ function doGeoCode(position) {
 		lon : lon
 	})
 }
-
 var intId;
-
+var success;
 function successGetCurPosi(position) {
 	success = true;
 	clearInterval(intId)
 	doGeoCode(position);
+	sessionStorage.lastGeo = new Date().getTime();
+	sessionStorage.isReloaded = 0;
 	location.assign("/dropper/index.jsp");
 }
 
 function getCurrentPosition() {
 	if (navigator.geolocation) {
-		var success = false;
+		success = false;
 
 		intId = setInterval(navigator.geolocation.getCurrentPosition(
 				successGetCurPosi, null, {
@@ -38,7 +39,11 @@ function getCurrentPosition() {
 		window.alert("位置情報が取得できませんでした")
 	}
 }
+//--------------------------------------
 
+
+//MessageRitrieverを利用する
+//--------------------------------------
 function doRetrieve() {
 	if (!parseInt(sessionStorage.isReloaded)) {
 		$.get("/dropper/retrieve.do", {
@@ -51,38 +56,51 @@ function doRetrieve() {
 	}
 	alert("retrieve");
 }
+//--------------------------------------
 
+// 読み込み直後に実行する
+//--------------------------------------
 function initialLoad() {
 	if ((!document.getElementsByName("lat").item(0).value || !document
 			.getElementsByName("lon").item(0).value)
 			|| (new Date().getTime() - sessionStorage.lastGeo > 30000)) {
 		getCurrentPosition();
-		sessionStorage.lastGeo = new Date().getTime();
-		sessionStorage.isReloaded = 0;
 	} else {
 		doRetrieve();
 	}
 }
+//--------------------------------------
 
-function dropper_drop() {
+
+// Dropボタンのclickで実行。MessageRegisterを利用
+//--------------------------------------
+function drop() {
 	var message = document.getElementsByName("message").item(0).value;
-	var name = document.getElementsByName("name").item(0);
-	var deleteKey = document.getElementsByName("deleteKey").item(0);
-	
-	if (name ) {
-		name = name.value;
-	}
-	if (deleteKey) {
-		deleteKey = deleteKey.value;
-	}
-	
 	
 	$.get("/dropper/register.do", {
 		message : message,
-		name : name,
-		deleteKey : deleteKey
 	});
 	location.assign("/dropper/index.jsp");
 	
 	alert("drop");
 }
+//--------------------------------------
+
+
+//返信のDropボタンのclickで実行。ReMessageRegisterを利用
+//--------------------------------------
+
+function reDrop(replyTo) {
+	var reMessage = document.getElementsByName("reMessage").item(0).value;
+	$.get("/dropper/reply.do", {
+		message : reMessage,
+		replyTo : replyTo
+	});
+	location.assign("/dropper/index.jsp");
+	
+	alert("reDrop");
+}
+//--------------------------------------
+
+// Deleteボタンのclickで実行。MessageRemoverを利用
+//--------------------------------------

@@ -18,6 +18,11 @@
     <param-value>jp.co.fitec.lesson.dropper.controller.MessageRegister</param-value>
   </context-param>
   <context-param>
+    <param-name>/reply.do</param-name>
+    <param-value>jp.co.fitec.lesson.dropper.controller.ReMessageRegister</param-value>
+  </context-param>
+  
+  <context-param>
     <param-name>/remove.do</param-name>
     <param-value>jp.co.fitec.lesson.dropper.controller.MessageRemover</param-value>
   </context-param>

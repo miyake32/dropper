@@ -19,11 +19,18 @@ public class MessageRemover implements Action{
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		MessageDAO dao = DAOFactory.createMessageDAO();
+		MessageDAO dao;
 		
 		// parameterとしてMessageのnumberとdeleteKeyを受けとる
-		long msgNum = new Integer(request.getParameter("msgNum"));
+		long msgNum = new Long(request.getParameter("msgNum"));
 		String deleteKey = request.getParameter("deleteKey");
+		//numberの符号が+だったらSimpleMessage,-だったらRepMessage
+		if (msgNum >= 0) {
+			dao = DAOFactory.createMessageDAO();
+		} else {
+			dao = DAOFactory.createReMessageDAO();
+		}
+		
 		
 		// numberからMessageを取得
 		Message message = dao.findByNumber(msgNum);
