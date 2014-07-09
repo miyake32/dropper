@@ -228,7 +228,7 @@
 
 								<form>
 									<textarea name="reMessage${msg.number}" required="required"
-										placeholder="Drop reply message"
+										placeholder="Drop reply!"
 									></textarea>
 									<input type="submit" value="reply"
 										onclick="reDrop(${msg.number})"

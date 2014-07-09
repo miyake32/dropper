@@ -28,6 +28,7 @@ public class MessageRetriever implements Action {
 
 		
 		for (Message msg : message) {
+			msg.setMessage(msg.getMessage().replaceAll("\n", "\\<br\\>"));
 			int reMessagesSize = ((SimpleMessage)msg).getReMessages().size();
 			int sizeCount = reMessagesSize;
 			
@@ -38,6 +39,8 @@ public class MessageRetriever implements Action {
 						sizeCount--;
 						i--;
 					}
+					((SimpleMessage)msg).getReMessages().get(i).setMessage(((SimpleMessage)msg).getReMessages().get(i).getMessage().replaceAll("\n", "\\<br\\>"));
+
 				}
 			}
 			if (sizeCount == 0) {
