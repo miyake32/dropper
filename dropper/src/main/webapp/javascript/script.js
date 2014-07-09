@@ -18,12 +18,12 @@ function storageParams() {
 function doGeoCode(position) {
 	alert("geocodedo");
 	// 緯度と経度の取得
-	sessionStorage.lat = position.coords.latitude + "";
-	sessionStorage.lon = position.coords.longitude + "";
+	localStorage.lat = position.coords.latitude + "";
+	localStorage.lon = position.coords.longitude + "";
 	storageParams();
 	$.get("/dropper/geocode.do", {
-		lat : sessionStorage.lat + "",
-		lon : sessionStorage.lon + "",
+		lat : localStorage.lat + "",
+		lon : localStorage.lon + "",
 		nameInStorage : nameInStorage,
 		deleteKeyInStorage : deleteKeyInStorage
 	})
@@ -34,8 +34,8 @@ function successGetCurPosi(position) {
 	success = true;
 	clearInterval(intId)
 	doGeoCode(position);
-	sessionStorage.lastGeo = new Date().getTime();
-	sessionStorage.isReloaded = 0;
+	localStorage.lastGeo = new Date().getTime();
+	localStorage.isReloaded = 0;
 	alert("getCurrentPosition successed");
 	location.assign("/dropper/index.jsp");
 }
@@ -53,7 +53,7 @@ function getCurrentPosition() {
 				}), 5000);
 
 	} else {
-		window.alert("位置情報が取得できませんでした")
+		alert("位置情報が取得できませんでした")
 	}
 }
 // --------------------------------------
@@ -72,32 +72,33 @@ function doRetrieve() {
 	case 3:
 		dist = 500;
 	default:
-		dist = 50;
+		dist = 150;
 	}
 	storageParams();
 
-	if (!parseInt(sessionStorage.isReloaded)) {
+	if (!parseInt(localStorage.isReloaded)) {
 		$.get("/dropper/retrieve.do", {
 			dist : dist,
 			nameInStorage : nameInStorage,
 			deleteKeyInStorage : deleteKeyInStorage
 		});
-		sessionStorage.isReloaded = 1;
+		localStorage.isReloaded = 1;
 		location.assign("/dropper/index.jsp");
 	} else {
-		sessionStorage.isReloaded = 0;
+		localStorage.isReloaded = 0;
 	}
-	alert("retrieve");
 }
 // --------------------------------------
 
 // 読み込み直後に実行する
 // --------------------------------------
 function initialLoad() {
-	if ((!sessionStorage.lat || !sessionStorage.lon)
-			|| (new Date().getTime() - sessionStorage.lastGeo > 30000)) {
+	if ((!localStorage.lat || !localStorage.lon)
+			|| (new Date().getTime() - localStorage.lastGeo > 60000)) {
 		getCurrentPosition();
-	} else {
+	} else if (!document.getElementsByName("addr").item(0).value){
+		doGeoCode({coords:{latitude:localStorage.lat, longitude:localStorage.long}});
+	}else	{
 		doRetrieve();
 	}
 }
@@ -115,8 +116,6 @@ function drop() {
 		deleteKeyInStorage : deleteKeyInStorage
 	});
 	location.assign("/dropper/index.jsp");
-
-	alert("drop");
 }
 // --------------------------------------
 
@@ -133,10 +132,15 @@ function reDrop(replyTo) {
 		deleteKeyInStorage : deleteKeyInStorage
 	});
 	location.assign("/dropper/index.jsp");
-
-	alert("reDrop");
 }
 // --------------------------------------
 
 // Deleteボタンのclickで実行。MessageRemoverを利用
 // --------------------------------------
+function remove(number) {
+	$.get("/dropper/remove.do", {
+		msgNum:number,
+		deleteKey: document.getElementsByName("inputDeleteKey")
+	})
+	location.assign("/dropper/index.jsp");
+}
