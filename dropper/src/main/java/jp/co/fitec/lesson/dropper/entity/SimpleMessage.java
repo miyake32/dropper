@@ -40,7 +40,7 @@ public class SimpleMessage implements Message, Serializable {
 	private double longitude;
 	
 	@Column(name="date_time")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTime;
 	private String message;
 	
@@ -53,7 +53,7 @@ public class SimpleMessage implements Message, Serializable {
 	@Column(name="is_active")
 	private int isActive;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="parentMessage")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="parentMessage")
 	@OrderBy("number ASC")
 	private List<ReMessage> reMessages;
 	

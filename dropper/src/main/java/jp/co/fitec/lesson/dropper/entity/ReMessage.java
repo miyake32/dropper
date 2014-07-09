@@ -1,5 +1,6 @@
 package jp.co.fitec.lesson.dropper.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,8 +15,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="remessage")
-public class ReMessage implements Message {
+public class ReMessage implements Message, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -322767708204387982L;
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="reply_to")
 	private SimpleMessage parentMessage;
@@ -30,7 +36,7 @@ public class ReMessage implements Message {
 	private double longitude;
 	
 	@Column(name="date_time")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTime;
 	private String message;
 	

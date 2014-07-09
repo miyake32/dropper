@@ -29,13 +29,13 @@ public class MessageRegister implements Action {
 		String name = (String) session.getAttribute("nameInStorage");
 		String deleteKey = (String) session.getAttribute("deleteKeyInStorage");
 
-		// name, deleteKeyに値がない場合はnull値を設定
-		if (name == "") {
-			name = null;
-		}
-		if (deleteKey == "") {
-			deleteKey = null;
-		}
+//		// name, deleteKeyに値がない場合はnull値を設定
+//		if (name == "") {
+//			name = null;
+//		}
+//		if (deleteKey == "") {
+//			deleteKey = null;
+//		}
 		
 		// Messageオブジェクトに値を設定
 		msg.setMessage(message);

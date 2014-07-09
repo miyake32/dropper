@@ -26,9 +26,22 @@ public class MessageRetriever implements Action {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 		List<Message> message = dao.findByPlace(lat, lon, dist);
 
+		
 		for (Message msg : message) {
-			if (((SimpleMessage) msg).getReMessages().size() == 0) {
-				((SimpleMessage) msg).setReMessages(null);
+			int reMessagesSize = ((SimpleMessage)msg).getReMessages().size();
+			int sizeCount = reMessagesSize;
+			
+			if (reMessagesSize > 0) {
+				for (int i = 0; i < sizeCount; i++) {
+					if (((SimpleMessage)msg).getReMessages().get(i).getIsActive() == 0) {
+						((SimpleMessage)msg).getReMessages().remove(i);
+						sizeCount--;
+						i--;
+					}
+				}
+			}
+			if (sizeCount == 0) {
+				((SimpleMessage)msg).setReMessages(null);
 			}
 		}
 

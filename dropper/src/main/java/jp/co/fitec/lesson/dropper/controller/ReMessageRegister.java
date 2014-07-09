@@ -33,13 +33,13 @@ public class ReMessageRegister implements Action {
 		Double lat = (Double) session.getAttribute("lat");
 		Double lon = (Double) session.getAttribute("lon");
 
-		// name, deleteKey, replyToに値がない場合はnull値を設定
-		if (name == "") {
-			name = null;
-		}
-		if (deleteKey == "") {
-			deleteKey = null;
-		}
+//		// name, deleteKey, replyToに値がない場合はnull値を設定
+//		if (name == "") {
+//			name = null;
+//		}
+//		if (deleteKey == "") {
+//			deleteKey = null;
+//		}
 		
 		
 		// Messageオブジェクトに値を設定
