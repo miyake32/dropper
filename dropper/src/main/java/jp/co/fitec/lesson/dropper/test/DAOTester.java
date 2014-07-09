@@ -34,7 +34,7 @@ public class DAOTester extends HttpServlet {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 
 		// find => OK!
-		response.getWriter().println(dao.findByPlace(34.693738D, 135.502165D, 30));
+		response.getWriter().println(dao.findByPlace(35.6901668D, 139.71280339999998D, 30));
 
 		// remove => OK!
 		// List<Message> msgs;

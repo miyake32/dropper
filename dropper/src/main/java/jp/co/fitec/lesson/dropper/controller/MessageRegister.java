@@ -26,8 +26,8 @@ public class MessageRegister implements Action {
 		// sessionのattributeを取得
 		Double lat = (Double) session.getAttribute("lat");
 		Double lon = (Double) session.getAttribute("lon");
-		String name = (String) session.getAttribute("nameInStrage");
-		String deleteKey = (String) session.getAttribute("deleteKeyInStrage");
+		String name = (String) session.getAttribute("nameInStorage");
+		String deleteKey = (String) session.getAttribute("deleteKeyInStorage");
 
 		// name, deleteKeyに値がない場合はnull値を設定
 		if (name == "") {

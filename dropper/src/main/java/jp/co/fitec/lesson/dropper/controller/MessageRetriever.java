@@ -9,23 +9,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.co.fitec.lesson.dropper.entity.Message;
+import jp.co.fitec.lesson.dropper.entity.SimpleMessage;
 import jp.co.fitec.lesson.dropper.integration.dao.DAOFactory;
 import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
 
 public class MessageRetriever implements Action {
-	
-	public String doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	public String doAction(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
-		Double lat = (Double)session.getAttribute("lat");
-		Double lon = (Double)session.getAttribute("lon");
+		Double lat = (Double) session.getAttribute("lat");
+		Double lon = (Double) session.getAttribute("lon");
 		int dist = new Integer(request.getParameter("dist"));
-		
+
 		MessageDAO dao = DAOFactory.createMessageDAO();
 		List<Message> message = dao.findByPlace(lat, lon, dist);
-			
+
+		for (Message msg : message) {
+			if (((SimpleMessage) msg).getReMessages().size() == 0) {
+				((SimpleMessage) msg).setReMessages(null);
+			}
+		}
+
 		session.setAttribute("messages", message);
-		
+
 		return "/index.jsp";
 	}
 

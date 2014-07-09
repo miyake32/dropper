@@ -26,8 +26,8 @@ public class ReMessageRegister implements Action {
 		// requestのparameterを取得
 		String message = request.getParameter("message");
 		Long replyTo = new Long(request.getParameter("replyTo"));
-		String name = (String) session.getAttribute("nameInStrage");
-		String deleteKey = (String) session.getAttribute("deleteKeyInStrage");
+		String name = (String) session.getAttribute("nameInStorage");
+		String deleteKey = (String) session.getAttribute("deleteKeyInStorage");
 
 		// sessionのattributeを取得
 		Double lat = (Double) session.getAttribute("lat");

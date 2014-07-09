@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
-.dropper-rep-toggle {
-	max-height: 5 !important;
+
+td,th{
+ border:none;
+ }
+
+table{
+	border:none;
+	right: 0;
 }
+

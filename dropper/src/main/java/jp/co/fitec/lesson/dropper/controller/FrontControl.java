@@ -44,14 +44,14 @@ public class FrontControl extends HttpServlet {
 	
 	private void setSessionAttributes(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		String nameInStrage = request.getParameter("nameInStrage");
-		String deleteKeyInStrage = request.getParameter("deleteKeyInStrage");
+		String nameInStorage = request.getParameter("nameInStorage") + "";
+		String deleteKeyInStorage = request.getParameter("deleteKeyInStorage") + "";
 		
-		if (!nameInStrage.equals(session.getAttribute("nameInStrage"))) {
-			session.setAttribute("nameInStrage", nameInStrage);
+		if (!nameInStorage.equals(session.getAttribute("nameInStorage"))) {
+			session.setAttribute("nameInStorage", nameInStorage);
 		}
-		if (!deleteKeyInStrage.equals(session.getAttribute("deleteKeyInStrage"))) {
-			session.setAttribute("deleteKeyInStrage", deleteKeyInStrage);
+		if (!deleteKeyInStorage.equals(session.getAttribute("deleteKeyInStorage"))) {
+			session.setAttribute("deleteKeyInStorage", deleteKeyInStorage);
 		}
 	}
 	

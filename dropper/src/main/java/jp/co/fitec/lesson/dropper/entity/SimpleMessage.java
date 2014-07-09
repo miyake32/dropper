@@ -24,6 +24,15 @@ public class SimpleMessage implements Message, Serializable {
 	 */
 	private static final long serialVersionUID = 2290094355798531046L;
 
+	public List<ReMessage> getReMessages() {
+		return reMessages;
+	}
+
+
+	public void setReMessages(List<ReMessage> reMessages) {
+		this.reMessages = reMessages;
+	}
+
 	@Id
 	private long number;
 	
