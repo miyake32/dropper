@@ -18,7 +18,8 @@ public class MessageDAO extends BaseDAO {
 		SQLQuery sql = session.createSQLQuery("select * from message " + 
 			"where 6378137 * ACOS((sin(latitude / 180 * PI()) * SIN("+ latitude +" / 180 * PI()))" + 
 			"+ (COS(latitude / 180 * PI()) * COS("+ latitude +" / 180 * PI())" + 
-			"* COS(("+ longitude + " - longitude) / 180 * PI()))) <= "+ distance +" AND is_active = 1" 
+			"* COS(("+ longitude + " - longitude) / 180 * PI()))) <= "+ distance +" AND is_active = 1 "
+					+ "ORDER BY number DESC"
 			).addEntity(SimpleMessage.class);	
 		
 		@SuppressWarnings("unchecked")
@@ -46,7 +47,7 @@ public class MessageDAO extends BaseDAO {
 	public void insert(Message message) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(message);
+		session.save((SimpleMessage)message);
 	}
 	
 	public Message findByNumber(long number) {
@@ -58,6 +59,6 @@ public class MessageDAO extends BaseDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		message.setIsActive(0);
-		session.update(message);
+		session.update((SimpleMessage)message);
 	}
 }

@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS dropper;
 CREATE DATABASE dropper; 
 USE dropper;
-CREATE TABLE simplemessage
+CREATE TABLE message
 (
 	number BIGINT PRIMARY KEY,
 	latitude DOUBLE NOT NULL,
@@ -26,7 +26,8 @@ CREATE TABLE remessage
 	reply_to BIGINT
 );
 
+INSERT INTO message VALUES (0, 0.0, 0.0, "1990-1-1-0-0-0",	"",	"",	"",	0);
+INSERT INTO remessage VALUES (0, 0.0, 0.0, "1990-1-1-0-0-0", "", "", "", 0, 0);
 
-
-INSERT INTO message VALUES (0, 0.0, 0.0, "1990-1-1-0-0-0",	"",	"",	"",	0, 0);
-INSERT INTO message VALUES (1, 30, 130, "2014-7-8", "test", "user", "delete", 1, 0);
+DESC message;
+DESC remessage;

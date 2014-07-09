@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jp.co.fitec.lesson.dropper.integration.dao.DAOFactory;
 import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
+import jp.co.fitec.lesson.dropper.integration.dao.ReMessageDAO;
 
 public class MessageFactory {
 
@@ -19,6 +20,16 @@ public class MessageFactory {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 
 		Message msg = dao.getNewMessage(); // numberが設定されたMessageオブジェクトを取得
+
+		msg.setDateTime(new Date());
+		msg.setIsActive(1);
+		return msg;
+	}
+	
+	public static ReMessage createReMessage() {
+		ReMessageDAO dao = DAOFactory.createReMessageDAO();
+
+		ReMessage msg = (ReMessage)dao.getNewMessage(); // numberが設定されたMessageオブジェクトを取得
 
 		msg.setDateTime(new Date());
 		msg.setIsActive(1);

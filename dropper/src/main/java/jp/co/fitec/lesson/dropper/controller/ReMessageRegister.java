@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import jp.co.fitec.lesson.dropper.entity.Message;
 import jp.co.fitec.lesson.dropper.entity.MessageFactory;
 import jp.co.fitec.lesson.dropper.entity.ReMessage;
+import jp.co.fitec.lesson.dropper.entity.SimpleMessage;
 import jp.co.fitec.lesson.dropper.integration.dao.DAOFactory;
+import jp.co.fitec.lesson.dropper.integration.dao.MessageDAO;
 
 public class ReMessageRegister implements Action {
 	
@@ -19,7 +21,7 @@ public class ReMessageRegister implements Action {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Message msg = MessageFactory.createMessage();
+		Message msg = MessageFactory.createReMessage();
 		
 		// requestのparameterを取得
 		String message = request.getParameter("message");
@@ -43,12 +45,12 @@ public class ReMessageRegister implements Action {
 		msg.setMessage(message);
 		msg.setName(name);
 		msg.setDeleteKey(deleteKey);
-		((ReMessage) msg).setReplyTo(replyTo);
+		((ReMessage) msg).setParentMessage((SimpleMessage)new MessageDAO().findByNumber(replyTo));
 		msg.setLatitude(lat);
 		msg.setLongitude(lon);
 		
 		// Databaseに追加
-		DAOFactory.createMessageDAO().insert(msg);
+		DAOFactory.createReMessageDAO().insert(msg);
 		
 		return "/index.jsp";
 	}
