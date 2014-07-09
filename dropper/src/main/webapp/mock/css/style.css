@@ -48,11 +48,20 @@ article {
 	overflow: auto;
 }
 
-td,th{
- border:none;
- }
-
-table{
-	border:none;
+td, th {
+	border: none;
 }
 
+table {
+	border: none;
+	border: "1";
+	width: 100%;
+}
+
+td {
+	text-align: right;
+}
+
+th {
+	text-align: left;
+}
