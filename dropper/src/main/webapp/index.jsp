@@ -14,13 +14,14 @@
 
 <script src="javascript/script.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"
-/>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet"
+	href="css/jquery.mobile-1.4.3.min.css"
+/>
+
+<script src="javascript/jquery-2.1.1.min.js"></script>
 <script
-	src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"
+	src="javascript/jquery.mobile-1.4.3.min.js"
 ></script>
 
 
@@ -105,9 +106,9 @@
 
 						<th>
 							<div id="messageFooter">
-								<p><fmt:formatDate value="${msg.dateTime}" type="both"/> 
+								<fmt:formatDate value="${msg.dateTime}" type="both"/> 
 								<c:if test='${msg.name != "" && msg.name != null}'>
-								　dropped by ${msg.name}</c:if> </p>
+								<br/>dropped by ${msg.name}</c:if>
 							</div>
 						</th>
 						<td><a
@@ -139,9 +140,9 @@
 
 											<th>
 												<div id="messageFooter">
-													<p><fmt:formatDate value="${reMsg.dateTime}" type="both"/> 
+													<fmt:formatDate value="${reMsg.dateTime}" type="both"/> 
 								<c:if test='${reMsg.name != "" && reMsg.name != null}'>
-								　dropped by ${reMsg.name}</c:if> </p>
+								<br/>dropped by ${reMsg.name}</c:if>
 												</div>
 											</th>
 											<c:if test='${reMsg.deleteKey != "" && reMsg.deleteKey != null}'>
