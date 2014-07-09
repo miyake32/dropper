@@ -65,10 +65,22 @@ function initialLoad() {
 }
 
 function dropper_drop() {
+	var message = document.getElementsByName("message").item(0).value;
+	var name = document.getElementsByName("name").item(0);
+	var deleteKey = document.getElementsByName("deleteKey").item(0);
+	
+	if (name ) {
+		name = name.value;
+	}
+	if (deleteKey) {
+		deleteKey = deleteKey.value;
+	}
+	
+	
 	$.get("/dropper/register.do", {
-		message : document.getElementsByName("message").item(0).value,
-		name : document.getElementsByName("name").item(0).value,
-		deleteKey : document.getElementsByName("deleteKey").item(0).value
+		message : message,
+		name : name,
+		deleteKey : deleteKey
 	});
 	location.assign("/dropper/index.jsp");
 	

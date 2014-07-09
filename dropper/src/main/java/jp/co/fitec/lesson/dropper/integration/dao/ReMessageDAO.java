@@ -16,7 +16,7 @@ public class ReMessageDAO extends MessageDAO {
 			
 		Session session = sessionFactory.getCurrentSession();
 			
-		SQLQuery sql = session.createSQLQuery("select * from message " + 
+		SQLQuery sql = session.createSQLQuery("select * from remessage " + 
 			"where 6378137 * ACOS((sin(latitude / 180 * PI()) * SIN("+ latitude +" / 180 * PI()))" + 
 			"+ (COS(latitude / 180 * PI()) * COS("+ latitude +" / 180 * PI())" + 
 			"* COS(("+ longitude + " - longitude) / 180 * PI()))) <= "+ distance +" AND is_active = 1" 
@@ -39,7 +39,7 @@ public class ReMessageDAO extends MessageDAO {
 	@Override
 	public Message getNewMessage() {
 		Session session = sessionFactory.getCurrentSession();
-		Message msg = (ReMessage) session.createSQLQuery("SELECT * FROM message WHERE number = (SELECT MAX(number) FROM message)").addEntity(ReMessage.class).list().get(0);
+		Message msg = (ReMessage) session.createSQLQuery("SELECT * FROM remessage WHERE number = (SELECT MAX(number) FROM remessage)").addEntity(ReMessage.class).list().get(0);
 		Message newMsg = new ReMessage();
 		newMsg.setNumber(msg.getNumber() + 1);
 		return newMsg;
@@ -50,7 +50,7 @@ public class ReMessageDAO extends MessageDAO {
 		
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(message);
+		session.save((ReMessage)message);
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public class ReMessageDAO extends MessageDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		message.setIsActive(0);
-		session.update(message);
+		session.update((ReMessage)message);
 	}
 }
 

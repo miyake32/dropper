@@ -34,7 +34,7 @@ public class DAOTester extends HttpServlet {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 
 		// find => OK!
-//		response.getWriter().println(dao.findByPlace(33D, 135D, 30));
+		response.getWriter().println(dao.findByPlace(34.693738D, 135.502165D, 30));
 
 		// remove => OK!
 		// List<Message> msgs;
@@ -45,12 +45,12 @@ public class DAOTester extends HttpServlet {
 		// response.getWriter().println(msgs = dao.findByPlace(33D, 135D, 30));
 
 		// insert => OK!
-		 Message newMsg = MessageFactory.createMessage();
-		 newMsg.setLatitude(33D);
-		 newMsg.setLongitude(135D);
-		 newMsg.setMessage("Now I'm testing DAO function!!\nIt's going fine!");
-		 newMsg.setName("Testman");
-		 newMsg.setDeleteKey("Test delete key");
-		 dao.insert(newMsg);
+//		 Message newMsg = MessageFactory.createMessage();
+//		 newMsg.setLatitude(33D);
+//		 newMsg.setLongitude(135D);
+//		 newMsg.setMessage("Now I'm testing DAO function!!\nIt's going fine!");
+//		 newMsg.setName("Testman");
+//		 newMsg.setDeleteKey("Test delete key");
+//		 dao.insert(newMsg);
 	}
 }

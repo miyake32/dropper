@@ -1,12 +1,13 @@
 package jp.co.fitec.lesson.dropper.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -15,9 +16,14 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name="simplemessage")
-public class SimpleMessage implements Message {
+@Table(name="message")
+public class SimpleMessage implements Message, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2290094355798531046L;
+
 	@Id
 	private long number;
 	
@@ -38,8 +44,7 @@ public class SimpleMessage implements Message {
 	@Column(name="is_active")
 	private int isActive;
 	
-	@OneToMany
-	@JoinColumn(name="number", referencedColumnName="reply_to")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="parentMessage")
 	@OrderBy("number DESC")
 	private List<ReMessage> reMessages;
 	
