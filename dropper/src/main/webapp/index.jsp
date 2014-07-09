@@ -113,12 +113,12 @@
 						</th>
 						<td><a
 							class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-mail ui-btn-inline"
-							href="#popup_lin3" data-transition="pop" data-rel="popup"
+							href="#popup_lin3_${msg.number}" data-transition="pop" data-rel="popup"
 							data-position-to="window"
 						></a> <c:if test='${msg.deleteKey != "" && msg.deleteKey != null}'>
 								<a
 									class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-delete ui-btn-inline"
-									href="#popup_lin1" data-transition="pop" data-rel="popup"
+									href="#popup_lin1_${msg.number}" data-transition="pop" data-rel="popup"
 									data-position-to="window"
 								></a>
 							</c:if></td>
@@ -148,7 +148,7 @@
 											<c:if test='${reMsg.deleteKey != "" && reMsg.deleteKey != null}'>
 												<td><a
 													class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-btn-icon-notext ui-icon-delete ui-btn-inline"
-													href="#popup_lin2" data-transition="pop" data-rel="popup"
+													href="#popup_lin2_${reMsg.number}" data-transition="pop" data-rel="popup"
 													data-position-to="window"
 												></a></td>
 											</c:if>
@@ -158,7 +158,7 @@
 								</div>
 
 							</article>
-							<div class="ui-corner-all" id="popup_lin2" data-role="popup"
+							<div class="ui-corner-all" id="popup_lin2_${reMsg.number}" data-role="popup"
 								data-theme="a"
 							>
 
@@ -187,7 +187,7 @@
 
 
 
-				<div class="ui-corner-all" id="popup_lin1" data-role="popup"
+				<div class="ui-corner-all" id="popup_lin1_${msg.number}" data-role="popup"
 					data-theme="a"
 				>
 
@@ -210,7 +210,7 @@
 				</div>
 
 
-				<div class="ui-corner-all" id="popup_lin3" data-role="popup"
+				<div class="ui-corner-all" id="popup_lin3_${msg.number}" data-role="popup"
 					data-theme="a"
 				>
 
@@ -227,7 +227,7 @@
 							<div id="inputArea">
 
 								<form>
-									<textarea name="reMessage" required="required"
+									<textarea name="reMessage${msg.number}" required="required"
 										placeholder="Drop reply message"
 									></textarea>
 									<input type="submit" value="reply"
@@ -242,30 +242,7 @@
 
 
 
-				<div class="ui-corner-all" id="popup_lin2" data-role="popup"
-					data-theme="a"
-				>
-
-					<a
-						class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-g ui-icon-delete ui-btn-icon-right ui-btn-icon-notext"
-						href="#" data-rel="back"
-					>閉じる</a>
-					<form>
-						<div class="ui-corner-top" data-role="header" data-theme="a">
-
-							<h4>距離変更</h4>
-						</div>
-						<div class="ui-corner-bottom ui-content" data-role="content"
-							data-theme="a"
-						>
-							<label class="ui-hidden-accessible" for="u_id">距離:</label> <input
-								name="user" id="u_id" type="text" placeholder="○○m" value=""
-								data-theme="a"
-							>
-							<button type="submit" data-theme="a" data-icon="check">取得範囲変更</button>
-						</div>
-					</form>
-				</div>
+			
 			</article>
 		</c:forEach>
 	</div>

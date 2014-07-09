@@ -137,8 +137,8 @@ function drop() {
 // --------------------------------------
 
 function reDrop(replyTo) {
-	var reMessage = document.getElementsByName("reMessage").item(0).value;
-
+	var reMessage = document.getElementsByName("reMessage" + replyTo).item(0).value;
+		
 	if (reMessage) {
 		storageParams();
 		$.get("/dropper/reply.do", {
