@@ -25,7 +25,19 @@
 
 
 <script type="text/javascript">
+function loopWait( timeWait )
+{
+    var timeStart = new Date().getTime();
+    var timeNow = new Date().getTime();
+    while( timeNow < (timeStart + timeWait ) )
+    {
+        timeNow = new Date().getTime();
+    }
+    return;
+}
+
 function loadFrame(name) {
+	loopWait(500);
 	switch (name){
 	case 1: window.point1.location.href="point1/index.jsp";
 	case 2: window.point2.location.href="point2/index.jsp";
