@@ -36,7 +36,7 @@
 	<div id="headerArea">
 		<table>
 			<tr>
-				<th>${addr}</th>
+				<th>中目黒（東京都目黒区）</th>
 				<!-- <td class=data-role= "footer" data-theme="g">
 					<form name="distForm" id="distForm">
 						<select name="dist" id="dist" onchange="select_box()"

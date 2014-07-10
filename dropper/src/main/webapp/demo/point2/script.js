@@ -89,24 +89,10 @@ function doRetrieve() {
 // 読み込み直後に実行する
 // --------------------------------------
 function initialLoad() {
-	if ((!localStorage.lat || !localStorage.lon)
-			|| (new Date().getTime() - +(localStorage.lastGeo) > 600000)) {
-		getCurrentPosition();
-	} else if (!document.getElementsByName("addr")
-			|| !document.getElementsByName("addr").item(0).value) {
-		doGeoCode({
-			coords : {
-				latitude : localStorage.lat,
-				longitude : localStorage.lon
-			}
-		});
-		doRetrieve();
-		location.assign("/dropper/demo/point2/index.jsp");
-
-	} else {
+	
 		doRetrieve();
 	}
-}
+
 // --------------------------------------
 
 // Dropボタンのclickで実行。MessageRegisterを利用
