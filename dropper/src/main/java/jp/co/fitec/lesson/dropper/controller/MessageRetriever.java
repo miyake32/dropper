@@ -1,6 +1,7 @@
 package jp.co.fitec.lesson.dropper.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,26 +27,39 @@ public class MessageRetriever implements Action {
 		MessageDAO dao = DAOFactory.createMessageDAO();
 		List<Message> message = dao.findByPlace(lat, lon, dist);
 
-		
 		for (Message msg : message) {
 			msg.setMessage(msg.getMessage().replaceAll("\n", "\\<br\\>"));
-			int reMessagesSize = ((SimpleMessage)msg).getReMessages().size();
-			int sizeCount = reMessagesSize;
-			
+			int reMessagesSize = ((SimpleMessage) msg).getReMessages().size();
+			System.out.println(reMessagesSize);
+			ArrayList<Integer> deleteInd = new ArrayList<>();
+
 			if (reMessagesSize > 0) {
-				for (int i = 0; i < sizeCount; i++) {
-					if (((SimpleMessage)msg).getReMessages().get(i).getIsActive() == 0) {
-						((SimpleMessage)msg).getReMessages().remove(i);
-						sizeCount--;
-						i--;
+				for (int i = 0; i < reMessagesSize; i++) {
+					if (((SimpleMessage) msg).getReMessages().get(i)
+							.getIsActive() == 0) {
+						deleteInd.add(i);
 					}
-					((SimpleMessage)msg).getReMessages().get(i).setMessage(((SimpleMessage)msg).getReMessages().get(i).getMessage().replaceAll("\n", "\\<br\\>"));
+					((SimpleMessage) msg)
+							.getReMessages()
+							.get(i)
+							.setMessage(
+									((SimpleMessage) msg).getReMessages()
+											.get(i).getMessage()
+											.replaceAll("\n", "\\<br\\>"));
+				}
+
+				for (int i = deleteInd.size() - 1; i >= 0; i--) {
+					((SimpleMessage) msg).getReMessages().remove((int)
+							deleteInd.get(i));
+					
+					
 
 				}
 			}
-			if (sizeCount == 0) {
-				((SimpleMessage)msg).setReMessages(null);
+			if (((SimpleMessage) msg).getReMessages().size() == 0) {
+				((SimpleMessage) msg).setReMessages(null);
 			}
+			System.out.println(((SimpleMessage) msg).getReMessages());
 		}
 
 		session.setAttribute("messages", message);
