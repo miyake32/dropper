@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>:Dropper demo</title>
+<style type="text/css">
+
+
+
+</style>
+</head>
+<body onload="loadFrame(1)">
+	<table>
+		<tr>
+			<td>point 1</td>
+			<td>point 2</td>
+			<td>point 3</td>
+		</tr>
+		<tr>
+			<td><iframe onload="loadFrame(2)" width=300 height=400 name="point1"></iframe></td>
+			<td><iframe onload="loadFrame(3)" width=300 height=400 name="point2"></iframe></td>
+			<td><iframe width=300 height=400 name="point3"></iframe></td>
+		</tr>
+	</table>
+
+
+<script type="text/javascript">
+function loadFrame(name) {
+	switch (name){
+	case 1: window.point1.location.href="point1/index.jsp";
+	case 2: window.point2.location.href="point2/index.jsp";
+	case 3: window.point3.location.href="point3/index.jsp";
+	}
+}
+</script>
+</body>
+</html>

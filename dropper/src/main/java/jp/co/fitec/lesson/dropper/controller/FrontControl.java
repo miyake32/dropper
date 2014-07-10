@@ -53,6 +53,16 @@ public class FrontControl extends HttpServlet {
 		if (!deleteKeyInStorage.equals(session.getAttribute("deleteKeyInStorage"))) {
 			session.setAttribute("deleteKeyInStorage", deleteKeyInStorage);
 		}
+		
+		String latStr = request.getParameter("lat");
+		String lonStr = request.getParameter("lon");
+		
+		if (latStr != null && lonStr != null) {
+			session.setAttribute("lat", new Double(latStr));
+			session.setAttribute("lon", new Double(lonStr));
+		}
+		
+		
 	}
 	
 
